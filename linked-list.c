@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 struct Node {
     char value;
@@ -24,25 +25,38 @@ void remove_beginning(struct LinkedList *list) {
 }
 
 int main() {
-    struct LinkedList list = { .head=NULL };
+    // insert_beginning
+    struct LinkedList list1 = { .head=NULL };
 
-    insert_beginning(&list, 'a');
-    insert_beginning(&list, 'b');
-    insert_beginning(&list, 'c');
+    insert_beginning(&list1, 'a');
 
-    printf("Adicionando elementos:\n");
-    printf("Primeiro elemento: %c\n", list.head->value);
-    printf("Segundo elemento: %c\n", list.head->next->value);
-    printf("Terceito elemento: %c\n\n", list.head->next->next->value);
+    assert(list1.head->value == 'a');
 
-    printf("Removendo elementos:\n");
+    insert_beginning(&list1, 'b');
 
-    remove_beginning(&list);
-    printf("Primeiro elemento: %c\n", list.head->value);
-    printf("Segundo elemento: %c\n\n", list.head->next->value);
+    assert(list1.head->value == 'b');
+    assert(list1.head->next->value == 'a');
 
-    remove_beginning(&list);
-    printf("Primeiro elemento: %c\n", list.head->value);
+    insert_beginning(&list1, 'c');
+
+    assert(list1.head->value == 'c');
+    assert(list1.head->next->value == 'b');
+    assert(list1.head->next->next->value == 'a');
+
+    // remove_beginning
+
+    remove_beginning(&list1);
+
+    assert(list1.head->value == 'b');
+    assert(list1.head->next->value == 'a');
+
+    remove_beginning(&list1);
+
+    assert(list1.head->value == 'a');
+
+    remove_beginning(&list1);
+
+    assert(list1.head == NULL);
 
     return 0;
 }
