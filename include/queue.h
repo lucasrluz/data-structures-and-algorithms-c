@@ -12,5 +12,6 @@ struct Queue {
 };
 
 void enqueue(struct Queue *q, char value);
+void dequeue(struct Queue *q);
 
 #endif

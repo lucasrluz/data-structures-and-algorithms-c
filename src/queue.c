@@ -16,3 +16,7 @@ void enqueue(struct Queue *q, char value) {
     q->rear->prev = new_node;
     q->rear = new_node;
 }
+
+void dequeue(struct Queue *q) {
+    q->front = q->front->prev;
+}
